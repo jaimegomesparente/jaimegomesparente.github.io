@@ -277,10 +277,13 @@ h2 {
       animation-timeline: view();
       animation-range: entry 0% cover 40%;
     }
+    /* the last blocks sit too close to the end of the page to scroll that far:
+       they finish as soon as they are fully on screen */
+    .courses li, .contact > * { animation-range: entry 0% entry 100%; }
     .section-head::after {
       animation: rule linear both;
       animation-timeline: view();
-      animation-range: entry 0% cover 50%;
+      animation-range: entry 0% cover 30%;
     }
   }
 
