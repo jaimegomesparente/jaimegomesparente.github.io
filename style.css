@@ -176,7 +176,8 @@ h2 {
 .card h3 { margin: 0; font: 400 32px/1 var(--display); text-transform: uppercase; }
 .card p { margin: 0; }
 .card .more { font-weight: 600; text-decoration: underline; }
-.card a:hover .px { filter: var(--img-filter) contrast(1.4); }
+.card a:hover { color: var(--ink); }
+.card a:hover h3 { color: var(--accent); }
 
 /* ---------- Courses ---------- */
 
@@ -219,3 +220,103 @@ h2 {
 
 .lang { display: inline-block; padding: 10px 0; }
 .lang span[aria-current] { font-weight: 600; text-decoration: none; }
+
+/* ---------- Motion ----------
+   "Trame": an element appears through a 4×4 Bayer dither whose threshold drops
+   frame by frame, the same dither as the images. The 16 masks are tiny inline PNGs
+   (regenerate: see tools/trame.py). Everything below is skipped when the visitor
+   asks for reduced motion. */
+
+@keyframes trame {
+  0.0% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAADElEQVR42mNgGBwAAACIAAF0uDlnAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAADElEQVR42mNgGBwAAACIAAF0uDlnAAAAAElFTkSuQmCC); }
+  6.25% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAFElEQVR42mNg+M/wnwEJMDEMCAAACnsCAeuC37IAAAAASUVORK5CYII=); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAFElEQVR42mNg+M/wnwEJMDEMCAAACnsCAeuC37IAAAAASUVORK5CYII=); }
+  12.5% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGElEQVR42mNg+M/wnwEJMDFQAKBmkWEGAHxvBAFNqIgkAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGElEQVR42mNg+M/wnwEJMDFQAKBmkWEGAHxvBAFNqIgkAAAAAElFTkSuQmCC); }
+  18.75% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGUlEQVR42mNg+M/wn4GBgQFGMzFQAMg3AwB1hAX/qrNoBwAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGUlEQVR42mNg+M/wn4GBgQFGMzFQAMg3AwB1hAX/qrNoBwAAAABJRU5ErkJggg==); }
+  25.0% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGUlEQVR42mNg+M/wn4GBgQFGMzGQASg3AwD3Agf9OHdNqAAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAGUlEQVR42mNg+M/wn4GBgQFGMzGQASg3AwD3Agf9OHdNqAAAAABJRU5ErkJggg==); }
+  31.25% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAH0lEQVR42mNg+M/wn4GBgQFGMzFgBTBV2FUQZwY+AAC0/Qn94U1PXQAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAH0lEQVR42mNg+M/wn4GBgQFGMzFgBTBV2FUQZwY+AAC0/Qn94U1PXQAAAABJRU5ErkJggg==); }
+  37.5% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNg+M/wn4GBgQFGMzFgBTBV2FUQMoMRTTWmCgDJLQr/d5YkVwAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNg+M/wn4GBgQFGMzFgBTBV2FUQMoMRTTWmCgDJLQr/d5YkVwAAAABJRU5ErkJggg==); }
+  43.75% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJklEQVR42mNg+M/wn4GBgQFGMzGgAUaoLIT1H4sKBiLNQKjGVAEAw/ULAeB+ugkAAAAASUVORK5CYII=); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJklEQVR42mNg+M/wn4GBgQFGMzGgAUaoLIT1H4sKBiLNQKjGVAEAw/ULAeB+ugkAAAAASUVORK5CYII=); }
+  50.0% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNg+M/wn4GBgQFGMzGgAUaoLIT1H4sKBiqYAQDf8QwB33oJlgAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNg+M/wn4GBgQFGMzGgAUaoLIT1H4sKBiqYAQDf8QwB33oJlgAAAABJRU5ErkJggg==); }
+  56.25% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKklEQVR42mNk+M+AAIwMDEwMaICRgYGBgeE/lPUfiwoGhv9QU6A0GWYAAGRiCQbMJvivAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAKklEQVR42mNk+M+AAIwMDEwMaICRgYGBgeE/lPUfiwoGhv9QU6A0GWYAAGRiCQbMJvivAAAAAElFTkSuQmCC); }
+  62.5% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJ0lEQVR42mNk+M+AAIwMDEwMaICRgYGBgeE/lPUfqwokWQYGsswAAO1NBwqG4M1sAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJ0lEQVR42mNk+M+AAIwMDEwMaICRgYGBgeE/lPUfqwokWQYGsswAAO1NBwqG4M1sAAAAAElFTkSuQmCC); }
+  68.75% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNk+M+AApgY0AAjAwMDA8N/KOs/VhVIsmSaAQDs0wcJF7SAdAAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIklEQVR42mNk+M+AApgY0AAjAwMDA8N/KOs/VhVIsmSaAQDs0wcJF7SAdAAAAABJRU5ErkJggg==); }
+  75.0% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIElEQVR42mNk+M+AApgY0AAjAwMDA8N/KOs/VhWUmwEAss8GCXKNVwsAAAAASUVORK5CYII=); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAIElEQVR42mNk+M+AApgY0AAjAwMDA8N/KOs/VhWUmwEAss8GCXKNVwsAAAAASUVORK5CYII=); }
+  81.25% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJ0lEQVR42mNk+M+AApgYGHAJMDIwYlXBSNAMRgYGBgaG/1DWfywqAPw4BA1UJ0cJAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJ0lEQVR42mNk+M+AApgYGHAJMDIwYlXBSNAMRgYGBgaG/1DWfywqAPw4BA1UJ0cJAAAAAElFTkSuQmCC); }
+  87.5% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJElEQVR42mNk+M+AApgYGHAJMDIwYlXBSNAMRgYGBgZkVRgqAOg0Aw1QkLODAAAAAElFTkSuQmCC); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAJElEQVR42mNk+M+AApgYGHAJMDIwYlXBSNAMRgYGBgZkVRgqAOg0Aw1QkLODAAAAAElFTkSuQmCC); }
+  93.75% { -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAHElEQVR42mNk+M+AApgYGKgvwMjAwMCAbBOGCgCmBAIN2ziFCQAAAABJRU5ErkJggg==); mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAAHElEQVR42mNk+M+AApgYGKgvwMjAwMCAbBOGCgCmBAIN2ziFCQAAAABJRU5ErkJggg==); }
+  100% { -webkit-mask-image: none; mask-image: none; }
+}
+@keyframes rule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.section-head, .top { border-bottom: 0; position: relative; }
+.section-head::after, .top::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--ink);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .trame, h1, .lede, .kicker, .hero .plate {
+    -webkit-mask-size: 8px 8px; mask-size: 8px 8px;
+  }
+  /* on load: the header rule draws, then the hero comes through the dither */
+  .top::after { animation: rule 700ms cubic-bezier(.2, .7, .2, 1) both; }
+  .kicker { animation: trame 500ms linear both; }
+  h1 { animation: trame 700ms linear 120ms both; }
+  .lede { animation: trame 500ms linear 320ms both; }
+  .hero .plate { animation: trame 800ms linear 420ms both; }
+
+  /* on scroll: sections come through the dither as they enter the screen */
+  @supports (animation-timeline: view()) {
+    .section-head > *, .card, .courses li, .contact > * {
+      -webkit-mask-size: 8px 8px; mask-size: 8px 8px;
+      animation: trame linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 90%;
+    }
+    .section-head::after {
+      animation: rule linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+
+  /* course rows: on hover the row turns to ink through the dither */
+  .courses a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--ink);
+    -webkit-mask-size: 8px 8px; mask-size: 8px 8px;
+    opacity: 0;
+  }
+  .courses a:hover::before, .courses a:focus-visible::before {
+    opacity: 1;
+    animation: trame 220ms linear both;
+  }
+  .courses a:hover, .courses a:focus-visible { color: var(--paper); transition: color 0s 110ms; }
+
+  /* project cards: a hard, offset dithered shadow, like a misregistered print */
+  .card .plate { position: relative; transition: transform 180ms cubic-bezier(.2, .7, .2, 1); }
+  .card .plate::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
+    transition: transform 180ms cubic-bezier(.2, .7, .2, 1);
+  }
+  .card a:hover .plate, .card a:focus-visible .plate { transform: translate(-4px, -4px); }
+  .card a:hover .plate::after, .card a:focus-visible .plate::after { transform: translate(10px, 10px); }
+  .card .more::after { content: "→"; display: inline-block; margin-left: 6px; transition: transform 180ms ease; }
+  .card a:hover .more::after, .card a:focus-visible .more::after { transform: translateX(6px); }
+}
+
+/* course rows need a positioning context and some side room for the ink fill */
+.courses a { position: relative; isolation: isolate; padding-inline: 12px; margin-inline: -12px; }
+.plate { background: var(--paper); }
+.card a { isolation: isolate; }

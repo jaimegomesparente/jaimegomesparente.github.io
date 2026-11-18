@@ -19,6 +19,7 @@ tools/
   dither.py         trame les images de tools/raw/ vers img/
   claylings.py      illustration des Claylings (la garde de nuit)
   illustrations.py  illustrations provisoires dessinées en code
+  trame.py          masques de l'animation d'apparition tramée (style.css)
   raw/              images sources (captures, illustrations)
 ```
 
@@ -59,6 +60,16 @@ python3 tools/build.py           # met à jour les versions des images dans les 
 ```
 
 Les réglages de tramage propres à une image (méthode, inversion) peuvent aller dans `PRESETS`, en haut de `dither.py`.
+
+## Animations
+
+Toutes en CSS, sans JavaScript, dans la section *Motion* de `style.css` :
+
+- au chargement, le filet de l'en-tête se trace et le haut de page apparaît à travers une trame Bayer 4×4 qui se remplit ;
+- au défilement, chaque section apparaît de la même façon (navigateurs qui gèrent `animation-timeline: view()` ; ailleurs, tout s'affiche directement) ;
+- au survol, les lignes des cours passent en encre à travers la trame, et les cartes projet se décollent avec une ombre tramée décalée.
+
+Rien ne bouge si le système du visiteur demande de réduire les animations.
 
 ## Publication
 
