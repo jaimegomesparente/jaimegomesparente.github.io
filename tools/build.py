@@ -48,7 +48,7 @@ TEXT = {
         "entries": "04 entries",
         "more": "View repository",
         "p": {
-            "claylings": ("Clay villagers working around their Crystal: storage, forge, crops, and spearmen holding the line against spiders",
+            "claylings": ("Three clay spearmen seen from behind on a palisade at night, looking out at a dark forest where spiders' eyes shine",
                           "Colony sim and real-time defence: autonomous clay villagers driven by state machines, 13 personality traits, dynamic weather, crafting chains, squads in formation and a procedurally generated world."),
             "wooly": ("A flock of sheep on a mountain path, a shepherd and an eagle's target sight",
                       "A transhumance roguelike: 40 sheep moving as boids, a dog with three modes, and folklore creatures, wolves and an eagle, to fend off along the trail."),
@@ -85,7 +85,7 @@ TEXT = {
         "entries": "04 entrées",
         "more": "Voir le dépôt",
         "p": {
-            "claylings": ("Villageois d'argile au travail autour de leur cristal : réserve, forge, cultures, et lanciers face aux araignées",
+            "claylings": ("Trois lanciers d'argile vus de dos sur une palissade, la nuit, face à une forêt sombre où brillent des yeux d'araignées",
                           "Colonie et défense en temps réel : des villageois d'argile autonomes pilotés par machine à états, 13 traits de personnalité, météo dynamique, chaîne d'artisanat, escouades en formation et monde généré procéduralement."),
             "wooly": ("Troupeau de moutons sur un chemin de montagne, un berger et le viseur d'un aigle",
                       "Roguelike de transhumance : 40 moutons qui se déplacent en boids, un chien à trois modes et des créatures du folklore, loups et aigle, à repousser le long des sentiers."),

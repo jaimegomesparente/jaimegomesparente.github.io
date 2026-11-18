@@ -4,7 +4,7 @@
     python3 tools/illustrations.py && python3 tools/dither.py
 
 Writes greyscale images to tools/raw/ (the Claylings image comes from
-claylings_scene.py, which uses the game's sprites). Replace any of them with a real screenshot
+claylings.py). Replace any of them with a real screenshot
 under the same name, then run dither.py again.
 """
 import math, random

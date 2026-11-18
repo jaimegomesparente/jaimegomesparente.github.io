@@ -26,9 +26,7 @@ EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 
 # Settings per image, used when the script runs on the whole of tools/raw/.
 # An image named on the command line uses the command-line options instead.
-PRESETS = {
-    "claylings": {"method": "atkinson", "invert": True},
-}
+PRESETS = {}
 
 
 def bayer(n=8):

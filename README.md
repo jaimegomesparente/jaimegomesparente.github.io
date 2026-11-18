@@ -17,7 +17,7 @@ img/                images tramées, générées par tools/dither.py
 tools/
   build.py          tous les textes (EN et FR) et le gabarit HTML
   dither.py         trame les images de tools/raw/ vers img/
-  claylings_scene.py  image des Claylings composée avec les sprites du jeu
+  claylings.py      illustration des Claylings (la garde de nuit)
   illustrations.py  illustrations provisoires dessinées en code
   raw/              images sources (captures, illustrations)
 ```
@@ -49,14 +49,16 @@ python3 tools/build.py   # régénère index.html et fr/index.html
 
 et committer les deux pages.
 
-## Image des Claylings
+## Régénérer les illustrations
 
 ```bash
-python3 tools/claylings_scene.py ../the-claylings   # chemin vers le dépôt du jeu
+python3 tools/illustrations.py   # simulation, Wooly Caravan, Face Masker
+python3 tools/claylings.py       # The Claylings
 python3 tools/dither.py
+python3 tools/build.py           # met à jour les versions des images dans les pages
 ```
 
-Les réglages de tramage propres à une image (méthode, inversion) sont dans `PRESETS`, en haut de `dither.py`.
+Les réglages de tramage propres à une image (méthode, inversion) peuvent aller dans `PRESETS`, en haut de `dither.py`.
 
 ## Publication
 
