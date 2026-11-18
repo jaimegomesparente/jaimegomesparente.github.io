@@ -3,7 +3,8 @@
 
     python3 tools/illustrations.py && python3 tools/dither.py
 
-Writes greyscale images to tools/raw/. Replace any of them with a real screenshot
+Writes greyscale images to tools/raw/ (the Claylings image comes from
+claylings_scene.py, which uses the game's sprites). Replace any of them with a real screenshot
 under the same name, then run dither.py again.
 """
 import math, random
@@ -72,32 +73,6 @@ def gravity():
     d.polygon([(286, 108), (294, 116), (282, 118)], fill=255)
     save("gravity", img)
 
-# 2. The Claylings: crystal with glow, clay blobs around it, night hills
-def claylings():
-    y, x = np.mgrid[0:H, 0:W]
-    arr = (y / H) * 70.0
-    arr += radial(160, 92, 130, 150)
-    img = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
-    d = ImageDraw.Draw(img)
-    d.polygon([(0, 160), (60, 140), (130, 150), (200, 138), (260, 148), (320, 136), (320, 200), (0, 200)], fill=40)
-    # crystal
-    d.polygon([(160, 40), (180, 85), (160, 130), (140, 85)], fill=245)
-    d.polygon([(160, 40), (180, 85), (160, 130)], fill=180)
-    d.polygon([(160, 130), (172, 140), (148, 140)], fill=120)
-    img = glow(img, 3, 0.5)
-    d = ImageDraw.Draw(img)
-    def blob(cx, cy, s, lit):
-        d.ellipse((cx - 7 * s, cy - 12 * s, cx + 7 * s, cy + 6 * s), fill=lit)
-        d.ellipse((cx - 5 * s, cy - 6 * s, cx + 5 * s, cy + 8 * s), fill=lit)
-        d.ellipse((cx - 3 * s - 1, cy - 7 * s, cx - 3 * s + 2, cy - 4 * s), fill=0)
-        d.ellipse((cx + 2 * s - 1, cy - 7 * s, cx + 2 * s + 2, cy - 4 * s), fill=0)
-    for cx, cy, s in [(100, 150, 1.4), (125, 160, 1.1), (205, 152, 1.3), (230, 164, 1.0), (70, 170, 1.2), (260, 176, 1.2)]:
-        lit = int(max(90, 230 - abs(cx - 160) * 1.2))
-        blob(cx, cy, s, lit)
-    # spear on one
-    d.line([(214, 128), (218, 158)], fill=210)
-    save("claylings", img)
-
 # 3. Wooly Caravan: flock of sheep along a mountain path
 def wooly():
     y, x = np.mgrid[0:H, 0:W]
@@ -155,4 +130,4 @@ def facemask():
     d.rectangle((244, 64, 280, 106), outline=200)
     save("facemask", img)
 
-gravity(); claylings(); wooly(); facemask()
+gravity(); wooly(); facemask()

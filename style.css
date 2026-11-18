@@ -86,7 +86,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   letter-spacing: 1px;
 }
 .brand { font-weight: 600; }
-.top nav { display: flex; flex-wrap: wrap; gap: 28px; }
+.top nav { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
 .top nav a { display: inline-block; padding: 10px 0; }
 
 main { display: flex; flex-direction: column; gap: 96px; }
@@ -214,3 +214,8 @@ h2 {
   .courses a { grid-template-columns: 1fr; gap: 4px; }
   h2 { font-size: 34px; }
 }
+
+/* ---------- Language switch ---------- */
+
+.lang { display: inline-block; padding: 10px 0; }
+.lang span[aria-current] { font-weight: 600; text-decoration: none; }

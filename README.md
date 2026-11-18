@@ -2,19 +2,22 @@
 
 Portfolio en ligne : https://jaimegomesparente.github.io
 
-Site statique servi tel quel par GitHub Pages (HTML et CSS, sans JavaScript ni étape de build).
+Site statique servi tel quel par GitHub Pages (HTML et CSS, sans JavaScript). Anglais à la racine, français dans `fr/`.
 
 ## Structure
 
 ```
-index.html          la page
+index.html          la page en anglais   } générées par tools/build.py,
+fr/index.html       la page en français  } ne pas les modifier à la main
 style.css           styles, couleurs, mode sombre
 favicon.svg
 .nojekyll           sert les fichiers tels quels, sans Jekyll
 fonts/              Archivo Black et IBM Plex Mono (licence OFL)
 img/                images tramées, générées par tools/dither.py
 tools/
+  build.py          tous les textes (EN et FR) et le gabarit HTML
   dither.py         trame les images de tools/raw/ vers img/
+  claylings_scene.py  image des Claylings composée avec les sprites du jeu
   illustrations.py  illustrations provisoires dessinées en code
   raw/              images sources (captures, illustrations)
 ```
@@ -36,9 +39,24 @@ Options utiles : `--method bayer|atkinson|floyd` (Bayer pour les schémas, Atkin
 
 Les images font 288 × 180 px et la page les affiche exactement à 2× (1× sur mobile), avec `image-rendering: pixelated`. Une échelle non entière rendrait la trame floue ou ferait du moiré : si la largeur change dans `dither.py`, il faut changer `.px` dans `style.css`.
 
-## Ajouter un projet
+## Modifier les textes ou ajouter un projet
 
-Copier un bloc `<article class="card">` dans `index.html`, puis changer le lien, l'image, le texte et le numéro de figure.
+Tout se trouve dans `tools/build.py` : la liste `PROJECTS`, puis les textes de chaque langue dans `TEXT`. Ensuite :
+
+```bash
+python3 tools/build.py   # régénère index.html et fr/index.html
+```
+
+et committer les deux pages.
+
+## Image des Claylings
+
+```bash
+python3 tools/claylings_scene.py ../the-claylings   # chemin vers le dépôt du jeu
+python3 tools/dither.py
+```
+
+Les réglages de tramage propres à une image (méthode, inversion) sont dans `PRESETS`, en haut de `dither.py`.
 
 ## Publication
 

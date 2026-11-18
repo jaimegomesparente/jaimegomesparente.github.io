@@ -24,6 +24,12 @@ PAPER = (236, 232, 220)  # --paper in style.css
 INK = (20, 20, 20)       # --ink in style.css
 EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 
+# Settings per image, used when the script runs on the whole of tools/raw/.
+# An image named on the command line uses the command-line options instead.
+PRESETS = {
+    "claylings": {"method": "atkinson", "invert": True},
+}
+
 
 def bayer(n=8):
     m = np.array([[0]])
@@ -90,10 +96,15 @@ def main():
     p.add_argument("--contrast", type=float, default=1.0, help="percent clipped at each end (0 = off)")
     p.add_argument("--invert", action="store_true", help="swap ink and paper")
     a = p.parse_args()
-    files = a.files or sorted(f for f in RAW.iterdir() if f.suffix.lower() in EXTS)
     OUT.mkdir(exist_ok=True)
-    for f in files:
-        process(f, OUT / (f.stem + ".png"), a.width, a.method, a.gamma, a.contrast, a.invert)
+    if a.files:
+        for f in a.files:
+            process(f, OUT / (f.stem + ".png"), a.width, a.method, a.gamma, a.contrast, a.invert)
+        return
+    for f in sorted(f for f in RAW.iterdir() if f.suffix.lower() in EXTS):
+        o = {"method": a.method, "gamma": a.gamma, "contrast": a.contrast, "invert": a.invert}
+        o.update(PRESETS.get(f.stem, {}))
+        process(f, OUT / (f.stem + ".png"), a.width, o["method"], o["gamma"], o["contrast"], o["invert"])
 
 
 if __name__ == "__main__":
