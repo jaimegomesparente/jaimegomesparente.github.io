@@ -263,11 +263,11 @@ h2 {
     -webkit-mask-size: 8px 8px; mask-size: 8px 8px;
   }
   /* on load: the header rule draws, then the hero comes through the dither */
-  .top::after { animation: rule 700ms cubic-bezier(.2, .7, .2, 1) both; }
-  .kicker { animation: trame 500ms linear both; }
-  h1 { animation: trame 700ms linear 120ms both; }
-  .lede { animation: trame 500ms linear 320ms both; }
-  .hero .plate { animation: trame 800ms linear 420ms both; }
+  .top::after { animation: rule 1400ms cubic-bezier(.2, .7, .2, 1) both; }
+  .kicker { animation: trame 1200ms linear 200ms both; }
+  h1 { animation: trame 1800ms linear 500ms both; }
+  .lede { animation: trame 1200ms linear 1300ms both; }
+  .hero .plate { animation: trame 2000ms linear 900ms both; }
 
   /* on scroll: sections come through the dither as they enter the screen */
   @supports (animation-timeline: view()) {
@@ -275,12 +275,12 @@ h2 {
       -webkit-mask-size: 8px 8px; mask-size: 8px 8px;
       animation: trame linear both;
       animation-timeline: view();
-      animation-range: entry 5% entry 90%;
+      animation-range: entry 0% cover 40%;
     }
     .section-head::after {
       animation: rule linear both;
       animation-timeline: view();
-      animation-range: entry 0% cover 35%;
+      animation-range: entry 0% cover 50%;
     }
   }
 
@@ -296,23 +296,23 @@ h2 {
   }
   .courses a:hover::before, .courses a:focus-visible::before {
     opacity: 1;
-    animation: trame 220ms linear both;
+    animation: trame 480ms linear both;
   }
-  .courses a:hover, .courses a:focus-visible { color: var(--paper); transition: color 0s 110ms; }
+  .courses a:hover, .courses a:focus-visible { color: var(--paper); transition: color 0s 240ms; }
 
   /* project cards: a hard, offset dithered shadow, like a misregistered print */
-  .card .plate { position: relative; transition: transform 180ms cubic-bezier(.2, .7, .2, 1); }
+  .card .plate { position: relative; transition: transform 320ms cubic-bezier(.2, .7, .2, 1); }
   .card .plate::after {
     content: "";
     position: absolute;
     inset: -2px;
     z-index: -1;
     background: repeating-conic-gradient(var(--ink) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
-    transition: transform 180ms cubic-bezier(.2, .7, .2, 1);
+    transition: transform 320ms cubic-bezier(.2, .7, .2, 1);
   }
   .card a:hover .plate, .card a:focus-visible .plate { transform: translate(-4px, -4px); }
   .card a:hover .plate::after, .card a:focus-visible .plate::after { transform: translate(10px, 10px); }
-  .card .more::after { content: "→"; display: inline-block; margin-left: 6px; transition: transform 180ms ease; }
+  .card .more::after { content: "→"; display: inline-block; margin-left: 6px; transition: transform 320ms ease; }
   .card a:hover .more::after, .card a:focus-visible .more::after { transform: translateX(6px); }
 }
 
