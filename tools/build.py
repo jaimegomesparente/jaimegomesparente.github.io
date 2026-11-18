@@ -6,6 +6,7 @@
 All the text of the site lives in TEXT below, one entry per language. Edit it
 here, run the script, and commit both generated pages.
 """
+import hashlib
 from html import escape
 from pathlib import Path
 from string import Template
@@ -13,6 +14,12 @@ from string import Template
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://jaimegomesparente.github.io/"
 GH = "https://github.com/jaimegomesparente/"
+
+
+def img(name):
+    """Image URL with a version taken from its content, so a new image is never hidden by a cached old one."""
+    v = hashlib.sha1((ROOT / "img" / f"{name}.png").read_bytes()).hexdigest()[:8]
+    return f"img/{name}.png?v={v}"
 
 # Projects: image, repository and stack are shared; the text is per language.
 PROJECTS = [
@@ -145,7 +152,7 @@ PAGE = Template("""<!doctype html>
     <p class="lede">$lede</p>
   </div>
   <figure class="plate">
-    <img class="px" src="${base}img/gravity.png" width="288" height="180" alt="$hero_alt">
+    <img class="px" src="${base}$hero_img" width="288" height="180" alt="$hero_alt">
     <figcaption><span>FIG. 00</span><span>$hero_caption</span></figcaption>
   </figure>
 </section>
@@ -190,7 +197,7 @@ $course_rows
 CARD = Template("""
     <article class="card">
       <a href="$href">
-        <span class="plate"><img class="px" src="${base}img/$id.png" width="288" height="180" loading="lazy" alt="$alt"></span>
+        <span class="plate"><img class="px" src="${base}$src" width="288" height="180" loading="lazy" alt="$alt"></span>
         <span class="meta"><span>FIG. $n</span><span>$stack</span></span>
         <h3>$name</h3>
         <p>$desc</p>
@@ -209,7 +216,7 @@ def build(lang):
     else:
         switch = '<a href="../" hreflang="en" lang="en" aria-label="English version">EN</a> / <span aria-current="true">FR</span>'
     cards = "\n".join(
-        CARD.substitute(base=base, href=GH + p["repo"], id=p["id"], n=f"{i:02d}", stack=escape(p["stack"]),
+        CARD.substitute(base=base, href=GH + p["repo"], src=img(p["id"]), n=f"{i:02d}", stack=escape(p["stack"]),
                         name=escape(p["name"]), alt=escape(t["p"][p["id"]][0]), desc=escape(t["p"][p["id"]][1]),
                         more=t["more"])
         for i, p in enumerate(PROJECTS, 1))
@@ -218,7 +225,7 @@ def build(lang):
         for c in COURSES)
     fields = {k: v for k, v in t.items() if isinstance(v, str)}
     fields.update({k: escape(t[k]) for k in ("description", "og", "hero_alt")})
-    fields.update(lang=lang, base=base, site=SITE, url=SITE + ("" if lang == "en" else "fr/"), switch=switch,
+    fields.update(lang=lang, base=base, hero_img=img("gravity"), site=SITE, url=SITE + ("" if lang == "en" else "fr/"), switch=switch,
                   cards=cards, course_rows=rows, nav0=t["nav"][0], nav1=t["nav"][1], nav2=t["nav"][2])
     html = PAGE.substitute(fields)
     out = ROOT / t["path"]
