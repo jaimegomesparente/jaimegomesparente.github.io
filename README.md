@@ -48,7 +48,7 @@ Tout se trouve dans `tools/build.py` : la liste `PROJECTS`, puis les textes de c
 python3 tools/build.py   # régénère index.html et fr/index.html
 ```
 
-et committer les deux pages.
+et committer les deux pages. Après une modification de `style.css`, relancer aussi `build.py` : il met à jour la version du CSS dans les pages, pour que les navigateurs ne gardent pas l'ancienne.
 
 ## Régénérer les illustrations
 
@@ -56,7 +56,7 @@ et committer les deux pages.
 python3 tools/illustrations.py   # simulation, Wooly Caravan, Face Masker
 python3 tools/claylings.py       # The Claylings
 python3 tools/dither.py
-python3 tools/build.py           # met à jour les versions des images dans les pages
+python3 tools/build.py           # met à jour les versions des images et du CSS dans les pages
 ```
 
 Les réglages de tramage propres à une image (méthode, inversion) peuvent aller dans `PRESETS`, en haut de `dither.py`.

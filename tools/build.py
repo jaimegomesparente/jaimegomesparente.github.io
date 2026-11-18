@@ -16,6 +16,12 @@ SITE = "https://jaimegomesparente.github.io/"
 GH = "https://github.com/jaimegomesparente/"
 
 
+def asset(path):
+    """URL with a version taken from the file's content, so browsers never keep a stale copy."""
+    v = hashlib.sha1((ROOT / path).read_bytes()).hexdigest()[:8]
+    return f"{path}?v={v}"
+
+
 def img(name):
     """Image URL with a version taken from its content, so a new image is never hidden by a cached old one."""
     v = hashlib.sha1((ROOT / "img" / f"{name}.png").read_bytes()).hexdigest()[:8]
@@ -126,7 +132,7 @@ PAGE = Template("""<!doctype html>
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
 <link rel="preload" href="${base}fonts/archivo-black.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="${base}style.css">
+<link rel="stylesheet" href="${base}$css">
 </head>
 <body>
 <a class="skip" href="#projects">$skip</a>
@@ -225,7 +231,7 @@ def build(lang):
         for c in COURSES)
     fields = {k: v for k, v in t.items() if isinstance(v, str)}
     fields.update({k: escape(t[k]) for k in ("description", "og", "hero_alt")})
-    fields.update(lang=lang, base=base, hero_img=img("gravity"), site=SITE, url=SITE + ("" if lang == "en" else "fr/"), switch=switch,
+    fields.update(lang=lang, base=base, css=asset("style.css"), hero_img=img("gravity"), site=SITE, url=SITE + ("" if lang == "en" else "fr/"), switch=switch,
                   cards=cards, course_rows=rows, nav0=t["nav"][0], nav1=t["nav"][1], nav2=t["nav"][2])
     html = PAGE.substitute(fields)
     out = ROOT / t["path"]
